@@ -34,3 +34,9 @@ ak47 <- as.data.frame(t(ak47))
 ![pic5](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic5.png)
 
 Now it's time to split the column into at least 3 different columns. It is easy to see that there are composed data inside each row. Since it's about prices throughout time, it is quite easy to see that the first part of the information is a timestamp, whereas the second part is probably related to the price at that moment and the last bit of information concerns the number of items sold in each transaction. For this reason, I divided column **V1** into three other columns, namely **timestamp**, **price** and **quantity**.
+
+```{r}
+ak47 <- ak47 %>% separate(V1,c("timestamp","price","quantity"),",")
+```
+
+![pic6](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic6.png)
