@@ -54,3 +54,28 @@ ak47 <- ak47 %>% separate(timestamp,c("record_date","record_time"),sep=12)
 ```
 
 ![pic8](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic8.png)
+
+Even though there is some fixing to do in the **record_time** column, I'll leave it for now and focus on **record_date**. I want to format it as in the `YYYY-MM-DD` format, so I will need some extra steps. First, I'll create 3 other columns, for years, months and days. Then, I united them in one column again:
+
+```{r}
+ak47 <- ak47 %>% separate(record_date,c("month","day","year")," ")
+
+for(i in 1:2802){
+  if(ak47[i,1]=="Jan") ak47[i,1] <- "01"
+  if(ak47[i,1]=="Feb") ak47[i,1] <- "02"
+  if(ak47[i,1]=="Mar") ak47[i,1] <- "03"
+  if(ak47[i,1]=="Apr") ak47[i,1] <- "04"
+  if(ak47[i,1]=="May") ak47[i,1] <- "05"
+  if(ak47[i,1]=="Jun") ak47[i,1] <- "06"
+  if(ak47[i,1]=="Jul") ak47[i,1] <- "07"
+  if(ak47[i,1]=="Aug") ak47[i,1] <- "08"
+  if(ak47[i,1]=="Sep") ak47[i,1] <- "09"
+  if(ak47[i,1]=="Oct") ak47[i,1] <- "10"
+  if(ak47[i,1]=="Nov") ak47[i,1] <- "11"
+  if(ak47[i,1]=="Dec") ak47[i,1] <- "12"
+}
+
+ak47 <- ak47 %>% unite(date_correct_format,c("year","month","day"),sep="-")
+```
+
+![pic9](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic9.png)
