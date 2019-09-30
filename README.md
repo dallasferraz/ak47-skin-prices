@@ -16,3 +16,19 @@ And then the data started looking friendlier:
 ![pic3](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic3.png)
 
 After this step, the data was all set for the RStudio.
+
+```{r}
+library(tidyverse)
+
+ak47 <- read.csv("~/ak47_bluelaminate.txt", header=FALSE, sep=";")
+```
+
+![pic4](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic4.png)
+
+The problem is that data manipulation for analysis is harder whenever the information is stored in this format, with several columns and few rows. There are some benefits to this shape but none that I can think of, when it comes to producing graphs or extracting insights from this dataset. In this case, I transposed the matrix and all columns became rows.
+
+```{r}
+ak47 <- as.data.frame(t(ak47))
+```
+
+![pic5](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic5.png)
