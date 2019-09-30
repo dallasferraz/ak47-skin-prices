@@ -79,3 +79,14 @@ ak47 <- ak47 %>% unite(date_correct_format,c("year","month","day"),sep="-")
 ```
 
 ![pic9](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic9.png)
+
+The goal of this example is to show how to prepare your data in order to facilitate the work of the data analyst. Since the data behaves differently from a certain point forward, I divided the dataset in two and dropped the column that kept track of the time for the first part of the dataset (since it presents no new source of information for the analyst), but I kept it for the second part of the dataset, which I treated to be more meaningful in the next step:
+
+```{r}
+ak47.cumulative.data <- ak47[1:2078,]
+ak47.cumulative.data <- select(ak47.cumulative.data,-record_time)
+
+ak47.hourly.data <- ak47[2079:2802,]
+```
+
+![pic10](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic10.png)
