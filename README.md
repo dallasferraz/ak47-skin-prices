@@ -44,3 +44,13 @@ ak47 <- ak47 %>% separate(V1,c("timestamp","price","quantity"),",")
 Now focusing on **timestamp** column, it seems like the information in it can be split even further. There is obviously a record of the year, month and day the transaction happened, but there is also some information regarding at what time it occurred. It is interesting to notice that, despite belonging to the same dataset, the data content changes abruptly in the 2079th row: before that, every single entry corresponded to a specific day and the timestamp is only meaningful regarding the date, but the time is irrelevant. After the 2080th entry, each row corresponds to an hour of the day (which is recorder 24 times, accordingly). It also shows on the column **quantity**, that was registering the cumulative sum of all trades of the day and its values fluctuated around 100 or more units. After the 2080th entry, it registers mostly less than 20 per transaction (and this really contributes to the theory that it stopped being cumulative and started recording each transaction):
 
 ![pic7](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic7.png)
+
+Before dealing with this problem, I separated the data from **timestamp** into two other columns: **record_date** and **record_time**. It is wise avoiding naming your variables and columns `time` or `date` because you might end up using reserved words (even though you're sure this is not a reserved word in the language you're working in, you can never be sure people won't migrate your code to other languages):
+
+```{r}
+# since the number of characters of the date is fixed, I separated them at the 12th charater
+
+ak47 <- ak47 %>% separate(timestamp,c("record_date","record_time"),sep=12)
+```
+
+![pic8](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic8.png)
