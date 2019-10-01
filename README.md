@@ -90,3 +90,17 @@ ak47.hourly.data <- ak47[2079:2802,]
 ```
 
 ![pic10](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic10.png)
+
+The analyst will have to work with two data frames. This is a suboptimal situation, provided that working with a thorough dataset is better than two half-decent datasets. Regardless, it is now time to focus on fixing the presentation of the hours in the **record_time** column of the *ak47.hourly.data* data frame. It is important to transform it to `hh:mm:ss` format, so analyses are simplified in the process.
+
+```{r}
+ak47.hourly.data <- ak47.hourly.data %>% separate(record_time,c("hour","rest"),":")
+
+ak47.hourly.data <- select(ak47.hourly.data,-rest)
+
+ak47.hourly.data$hour <- paste(ak47.hourly.data$hour,":00:00",sep="")
+```
+
+![pic11](https://raw.githubusercontent.com/dallasferraz/ak47-skin-prices/master/pic11.png)
+
+The data is now all set for analysis.
